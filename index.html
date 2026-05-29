@@ -39,135 +39,169 @@
 
   <style>
     :root{
-      --bg1:#0a0f2a;
-      --bg2:#0b2a4a;
-      --bg3:#2b1558;
-      --ink:#f3f7ff;
-      --muted:rgba(243,247,255,.75);
-      --line:rgba(255,255,255,.14);
-
-      --good:#22c55e;
-      --bad:#ef4444;
-
-      --pink:#ff4fd8;
-      --cyan:#42e6ff;
-      --lime:#68ff9d;
-      --gold:#ffd25a;
-
-      --shadow:0 18px 52px rgba(0,0,0,.38);
+      --mustard:#f5c84c;
+      --mustard2:#ffd86b;
+      --cream:#fff7df;
+      --cream2:#fffaf0;
+      --orange:#f59e0b;
+      --brown:#5b3b12;
+      --ink:#273142;
+      --muted:#6b5a36;
+      --line:rgba(91,59,18,.18);
+      --good:#16a34a;
+      --bad:#dc2626;
+      --blue:#38bdf8;
+      --pink:#fb7185;
+      --green:#86efac;
+      --gold:#facc15;
+      --shadow:0 14px 34px rgba(91,59,18,.18);
       --r:24px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --font:"Comic Sans MS","Comic Neue",ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
       --vh:1vh;
     }
 
     *{box-sizing:border-box}
 
-    html, body{
+    html,body{
       width:100%;
       max-width:100%;
+      margin:0;
       overflow-x:hidden;
     }
 
-    button, .tab, input, select{
-      touch-action: manipulation;
+    button,.tab,input,select{
+      font-family:inherit;
+      touch-action:manipulation;
     }
 
     body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--ink);
       min-height:calc(var(--vh, 1vh) * 100);
-      overflow-x:hidden;
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
+      color:var(--ink);
+      font-family:var(--font);
+      -webkit-text-size-adjust:100%;
+      text-size-adjust:100%;
       background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(66,230,255,.22), transparent 60%),
-        radial-gradient(900px 600px at 85% 20%, rgba(255,79,216,.18), transparent 60%),
-        radial-gradient(900px 700px at 40% 90%, rgba(104,255,157,.14), transparent 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg2) 55%, var(--bg3));
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.60), transparent 24%),
+        radial-gradient(circle at 85% 12%, rgba(255,244,191,.80), transparent 26%),
+        radial-gradient(circle at 45% 92%, rgba(255,181,76,.28), transparent 34%),
+        linear-gradient(135deg, var(--mustard), var(--mustard2) 52%, #f6b83f);
     }
 
     body:before{
       content:"";
-      position:fixed; inset:0;
+      position:fixed;
+      inset:0;
       pointer-events:none;
+      opacity:.42;
       background-image:
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,.18) 0 2px, transparent 3px),
-        radial-gradient(circle at 24% 70%, rgba(255,255,255,.12) 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 30%, rgba(255,255,255,.12) 0 2px, transparent 3px),
-        radial-gradient(circle at 88% 72%, rgba(255,255,255,.16) 0 2px, transparent 3px),
-        radial-gradient(circle at 52% 14%, rgba(255,255,255,.10) 0 2px, transparent 3px);
-      opacity:.65;
-      mix-blend-mode:screen;
+        radial-gradient(circle at 10% 20%, rgba(91,59,18,.18) 0 2px, transparent 3px),
+        radial-gradient(circle at 24% 70%, rgba(91,59,18,.12) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 30%, rgba(91,59,18,.12) 0 2px, transparent 3px),
+        radial-gradient(circle at 88% 72%, rgba(91,59,18,.16) 0 2px, transparent 3px),
+        radial-gradient(circle at 52% 14%, rgba(91,59,18,.10) 0 2px, transparent 3px);
     }
 
-    .wrap{max-width:1180px;margin:0 auto;padding:18px 14px 68px;}
-    .wrap,
-    .card,
-    .cardBody,
-    .cardHead,
-    .moneyRow,
-    .practiceHud,
-    .answerRow,
-    .activityBanner,
-    .topActions,
-    .mainBtns{
-      max-width:100%;
+    .wrap{
+      max-width:1180px;
+      margin:0 auto;
+      padding:18px 14px 68px;
+      position:relative;
+      z-index:1;
     }
 
     header{
-      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
-      padding:12px 12px 8px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 8px 8px;
     }
-    .title{display:flex;gap:12px;align-items:flex-start;}
+
+    .title{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+
     .badge{
-      width:52px;height:52px;border-radius:18px;
-      background:linear-gradient(135deg, rgba(66,230,255,.92), rgba(255,79,216,.88));
-      display:grid;place-items:center;
-      box-shadow:0 18px 46px rgba(0,0,0,.34);
-      border:1px solid rgba(255,255,255,.18);
+      width:54px;
+      height:54px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#fff7ad,#f59e0b);
+      display:grid;
+      place-items:center;
+      box-shadow:var(--shadow);
+      border:2px solid rgba(255,255,255,.85);
       flex:0 0 auto;
-      font-size:28px;
+      font-size:30px;
     }
+
     h1{
       margin:0;
-      font-size:26px;
+      font-size:28px;
       letter-spacing:.2px;
       line-height:1.05;
-      text-shadow:0 10px 30px rgba(0,0,0,.35);
+      color:#3c2505;
+      text-shadow:0 2px 0 rgba(255,255,255,.35);
     }
+
     .sub{
       margin:8px 0 0;
       color:var(--muted);
       font-size:14px;
-      line-height:1.45;
-      max-width:820px;
+      line-height:1.42;
+      max-width:830px;
+      font-weight:700;
     }
-    .sub b{color:#fff}
 
-    .topActions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
+    .sub b{color:#3c2505}
+
+    .topActions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
     .pill{
-      padding:10px 12px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.08);
-      color:var(--ink);
-      display:flex;gap:10px;align-items:center;font-size:13px;
-      box-shadow:0 12px 30px rgba(0,0,0,.20);
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,250,240,.78);
+      color:#3c2505;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      font-size:13px;
+      font-weight:1000;
+      box-shadow:0 8px 20px rgba(91,59,18,.12);
       user-select:none;
-      backdrop-filter: blur(10px);
+      backdrop-filter:blur(10px);
     }
+
     .pill input{transform:translateY(1px)}
+
     .statusDot{
-      width:10px;height:10px;border-radius:50%;
-      background:rgba(255,255,255,.25);
-      box-shadow:0 0 0 8px rgba(255,255,255,.06);
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#94a3b8;
+      box-shadow:0 0 0 8px rgba(148,163,184,.16);
     }
-    .statusDot.ready{background:rgba(104,255,157,.95);box-shadow:0 0 0 10px rgba(104,255,157,.14)}
+
+    .statusDot.ready{
+      background:#22c55e;
+      box-shadow:0 0 0 9px rgba(34,197,94,.15);
+    }
+
     .statusDot.speaking{
-      background:rgba(66,230,255,.95);
-      box-shadow:0 0 0 10px rgba(66,230,255,.18);
+      background:#38bdf8;
+      box-shadow:0 0 0 9px rgba(56,189,248,.18);
       animation:pulse 1.05s ease-in-out infinite;
     }
+
     @keyframes pulse{
       0%{transform:scale(1);opacity:.9}
       50%{transform:scale(1.18);opacity:1}
@@ -176,143 +210,221 @@
 
     .btn{
       border:0;
-      background:linear-gradient(135deg, rgba(66,230,255,.98), rgba(255,79,216,.90));
-      color:#071024;
+      background:linear-gradient(135deg,#38bdf8,#86efac);
+      color:#102033;
       font-weight:1000;
-      padding:11px 16px;
-      border-radius:16px;
+      padding:12px 16px;
+      border-radius:17px;
       cursor:pointer;
       box-shadow:var(--shadow);
       transition:transform .12s ease, filter .12s ease;
       white-space:nowrap;
+      min-height:44px;
     }
-    .btn:hover{filter:brightness(1.04)}
-    .btn:active{transform:scale(.98)}
-    .btn.ghost{
-      background:rgba(255,255,255,.08);
-      color:var(--ink);
-      border:1px solid var(--line);
-      box-shadow:0 12px 30px rgba(0,0,0,.20);
-      backdrop-filter: blur(10px);
-    }
-    .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
 
-    .grid{display:grid;grid-template-columns: 1.25fr .75fr;gap:14px;margin-top:12px;}
-    @media (max-width: 980px){ .grid{grid-template-columns:1fr} .topActions{justify-content:flex-start} }
+    .btn:hover{filter:brightness(1.03)}
+    .btn:active{transform:scale(.98)}
+
+    .btn.ghost{
+      background:rgba(255,250,240,.82);
+      color:#3c2505;
+      border:1px solid var(--line);
+      box-shadow:0 8px 20px rgba(91,59,18,.12);
+      backdrop-filter:blur(10px);
+    }
+
+    .btn.warm{
+      background:linear-gradient(135deg,#fde68a,#fb923c);
+      color:#4a2500;
+    }
+
+    .btn:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:14px;
+      margin-top:12px;
+    }
 
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
-      border:1px solid var(--line);
+      background:rgba(255,250,240,.82);
+      border:1px solid rgba(91,59,18,.16);
       border-radius:var(--r);
       box-shadow:var(--shadow);
       overflow:hidden;
-      backdrop-filter: blur(14px);
+      backdrop-filter:blur(12px);
     }
+
     .cardHead{
-      padding:14px 14px 12px;
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      background:rgba(0,0,0,.18);
-      border-bottom:1px solid var(--line);
+      padding:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      background:rgba(255,255,255,.38);
+      border-bottom:1px solid rgba(91,59,18,.14);
     }
-    .cardHead h2{margin:0;font-size:15px}
+
+    .cardHead h2{
+      margin:0;
+      color:#3c2505;
+      font-size:17px;
+    }
+
     .cardBody{padding:14px}
 
-    .modeTabs{display:flex;gap:10px;flex-wrap:wrap;}
+    .modeTabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
     .tab{
-      padding:10px 14px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.08);
-      color:var(--ink);
+      padding:11px 15px;
+      border-radius:999px;
+      border:1px solid rgba(91,59,18,.16);
+      background:rgba(255,255,255,.62);
+      color:#4a2500;
       cursor:pointer;
       font-weight:1000;
       font-size:14px;
       user-select:none;
-      backdrop-filter: blur(10px);
+      box-shadow:0 6px 14px rgba(91,59,18,.09);
       transition:transform .12s ease, filter .12s ease;
     }
-    .tab:hover{filter:brightness(1.04)}
-    .tab.active{
-      background:linear-gradient(135deg, rgba(104,255,157,.18), rgba(66,230,255,.16));
-      border-color:rgba(66,230,255,.35);
-    }
-    .tab.locked{opacity:.55;cursor:not-allowed;filter:none}
 
-    .hint{color:var(--muted);font-size:14px;line-height:1.45;margin:0 0 10px;}
+    .tab.active{
+      background:linear-gradient(135deg,#bbf7d0,#bae6fd);
+      border-color:rgba(14,165,233,.35);
+      color:#064e3b;
+    }
+
+    .tab.locked{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    .hint{
+      color:#6b5a36;
+      font-size:14px;
+      line-height:1.45;
+      margin:0 0 10px;
+      font-weight:800;
+    }
+
     .chipStat{
-      padding:9px 12px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.08);
-      color:var(--ink);
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(91,59,18,.14);
+      background:rgba(255,255,255,.66);
+      color:#4a2500;
       font-weight:1000;
       font-size:13px;
-      backdrop-filter: blur(10px);
-      display:inline-flex;gap:8px;align-items:center;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      box-shadow:0 6px 14px rgba(91,59,18,.08);
     }
+
     .chipStat .miniDot{
-      width:9px;height:9px;border-radius:50%;
-      background:rgba(255,255,255,.28);
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:#f59e0b;
     }
 
     .activityBanner{
       margin-bottom:12px;
       padding:13px;
       border-radius:22px;
-      border:1px solid rgba(255,255,255,.16);
-      background:linear-gradient(135deg, rgba(104,255,157,.18), rgba(66,230,255,.13));
+      border:1px solid rgba(91,59,18,.16);
+      background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(255,244,191,.78));
       display:flex;
       justify-content:space-between;
       gap:12px;
       align-items:center;
       flex-wrap:wrap;
     }
+
     .activityBanner .big{
-      font-size:20px;
+      font-size:21px;
       font-weight:1000;
       line-height:1.12;
+      color:#3c2505;
     }
+
     .activityBanner .small{
       margin-top:5px;
       font-size:13px;
-      color:rgba(255,255,255,.75);
+      color:#6b5a36;
       line-height:1.35;
+      font-weight:800;
     }
 
     .teachingBox{
       margin-bottom:12px;
       padding:13px 14px;
       border-radius:20px;
-      border:1px solid rgba(255,210,90,.38);
-      background:linear-gradient(135deg, rgba(255,210,90,.20), rgba(104,255,157,.13));
-      box-shadow:0 12px 28px rgba(0,0,0,.18);
+      border:1px solid rgba(245,158,11,.28);
+      background:linear-gradient(135deg,#fff7ad,#dcfce7);
+      box-shadow:0 8px 20px rgba(91,59,18,.10);
       font-weight:1000;
       line-height:1.45;
-      color:#fff;
+      color:#3c2505;
     }
+
     .teachingBox .bigEq{
       display:inline-block;
       padding:4px 10px;
       margin:0 2px;
       border-radius:999px;
-      background:rgba(0,0,0,.35);
-      border:1px solid rgba(255,255,255,.18);
-      color:#fff;
+      background:rgba(255,255,255,.75);
+      border:1px solid rgba(91,59,18,.15);
+      color:#3c2505;
       font-family:var(--mono);
     }
 
-    .moneyRow{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:center;}
+    .moneyRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:flex-end;
+      justify-content:center;
+      padding:6px 0;
+      min-height:118px;
+    }
+
     .moneyItem{
       position:relative;
-      width:140px;height:92px;border-radius:20px;
-      border:2px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.07);
-      box-shadow:0 14px 30px rgba(0,0,0,.28);
+      width:140px;
+      height:92px;
+      border-radius:20px;
+      border:2px solid rgba(91,59,18,.10);
+      background:rgba(255,255,255,.64);
+      box-shadow:0 12px 24px rgba(91,59,18,.14);
       overflow:hidden;
-      display:grid;place-items:center;
+      display:grid;
+      place-items:center;
       padding-top:10px;
       transform:translateZ(0);
       transition:transform .12s ease, box-shadow .12s ease, outline .12s ease, opacity .12s ease, filter .12s ease;
     }
-    .moneyItem.small{ width:106px;height:86px;border-radius:20px; }
+
+    .moneyItem.small{
+      width:106px;
+      height:86px;
+      border-radius:20px;
+    }
+
     .moneyItem .label{
-      position:absolute;left:10px;top:8px;
+      position:absolute;
+      left:10px;
+      top:8px;
       font-size:12px;
       color:#fff;
       font-weight:1000;
@@ -320,37 +432,45 @@
       z-index:5;
       padding:5px 8px;
       border-radius:999px;
-      background:rgba(0,0,0,.72);
-      border:1px solid rgba(255,255,255,.18);
-      text-shadow:0 2px 6px rgba(0,0,0,.35);
+      background:rgba(91,59,18,.82);
+      border:1px solid rgba(255,255,255,.28);
+      text-shadow:0 2px 6px rgba(0,0,0,.25);
     }
+
     .moneyItem .kind{
-      position:absolute;right:10px;top:8px;
+      position:absolute;
+      right:10px;
+      top:8px;
       font-size:11px;
       color:#fff;
       font-weight:1000;
       z-index:5;
       padding:5px 8px;
       border-radius:999px;
-      background:rgba(0,0,0,.60);
-      border:1px solid rgba(255,255,255,.16);
+      background:rgba(91,59,18,.70);
+      border:1px solid rgba(255,255,255,.22);
       letter-spacing:.6px;
     }
-    .moneyItem.dim{ opacity:.35; filter:saturate(.85) brightness(.92); }
+
+    .moneyItem.dim{
+      opacity:.32;
+      filter:saturate(.78) brightness(.96);
+    }
+
     .moneyItem.highlight{
       opacity:1;
-      outline:4px solid rgba(66,230,255,.85);
+      outline:4px solid rgba(14,165,233,.78);
       box-shadow:
-        0 0 0 10px rgba(66,230,255,.18),
-        0 20px 52px rgba(0,0,0,.34);
-      transform:translateY(-2px) scale(1.01);
-      filter:saturate(1.10) brightness(1.06);
+        0 0 0 10px rgba(14,165,233,.13),
+        0 16px 30px rgba(91,59,18,.18);
+      transform:translateY(-3px) scale(1.02);
+      filter:saturate(1.10) brightness(1.04);
     }
+
     .moneyItem.counted{
       opacity:1;
-      outline:3px solid rgba(104,255,157,.55);
-      box-shadow:0 14px 32px rgba(0,0,0,.26);
-      filter:saturate(1.08) brightness(1.04);
+      outline:3px solid rgba(22,163,74,.45);
+      filter:saturate(1.05) brightness(1.02);
     }
 
     .moneyRow.quizMode .moneyItem .label,
@@ -360,78 +480,109 @@
 
     .moneyItem .coin,
     .moneyItem .noteCard,
-    .moneyItem .coinOct{ color:#0b1220; }
+    .moneyItem .coinOct{
+      color:#0b1220;
+    }
 
     .moneyItem .coin{
-      width:70px;height:70px;border-radius:50%;
-      display:grid;place-items:center;
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
       position:relative;
-      border:3px solid rgba(255,255,255,.62);
-      box-shadow:0 14px 22px rgba(0,0,0,.22);
+      border:3px solid rgba(255,255,255,.72);
+      box-shadow:0 10px 18px rgba(91,59,18,.18);
       user-select:none;
       overflow:hidden;
     }
+
     .moneyItem .coin:before{
       content:"";
-      position:absolute; inset:0;
+      position:absolute;
+      inset:0;
       border-radius:50%;
-      background: radial-gradient(circle at 28% 25%, rgba(255,255,255,.58), rgba(255,255,255,0) 50%);
+      background:radial-gradient(circle at 28% 25%,rgba(255,255,255,.62),rgba(255,255,255,0) 50%);
       pointer-events:none;
       opacity:.95;
     }
+
     .moneyItem .coin .inner{
-      width:54px;height:54px;border-radius:50%;
-      display:grid;place-items:center;
-      border:2px solid rgba(0,0,0,.12);
+      width:54px;
+      height:54px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      border:2px solid rgba(0,0,0,.10);
       background:rgba(255,255,255,.88);
       font-weight:1000;
-      letter-spacing:.2px;
       color:#0b1220;
       text-align:center;
-      box-shadow: inset 0 2px 0 rgba(255,255,255,.75);
+      box-shadow:inset 0 2px 0 rgba(255,255,255,.75);
       position:relative;
       z-index:1;
     }
+
     .moneyItem .coin .inner span{font-size:18px}
     .moneyItem .coin .inner small{
-      display:block;font-size:10px;font-weight:1000;letter-spacing:.7px;opacity:.9;margin-top:1px;text-transform:uppercase;
+      display:block;
+      font-size:10px;
+      font-weight:1000;
+      letter-spacing:.7px;
+      opacity:.9;
+      margin-top:1px;
+      text-transform:uppercase;
     }
 
-    .moneyItem .c5 { background:#66f0b2; }
-    .moneyItem .c10{ background:#5ad2ff; }
-    .moneyItem .c20{ background:#ff7abf; }
-    .moneyItem .c50{ background:#ffd25a; }
+    .moneyItem .c5{background:#66f0b2}
+    .moneyItem .c10{background:#5ad2ff}
+    .moneyItem .c20{background:#ff7abf}
+    .moneyItem .c50{background:#ffd25a}
 
     .moneyItem .coinOct{
-      width:74px; height:74px;
-      display:grid; place-items:center;
+      width:74px;
+      height:74px;
+      display:grid;
+      place-items:center;
       font-weight:1000;
-      border:3px solid rgba(255,255,255,.65);
-      clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+      border:3px solid rgba(255,255,255,.72);
+      clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
       background:#ffcf4f;
       position:relative;
       user-select:none;
       overflow:hidden;
       color:#0b1220;
-      box-shadow:0 14px 22px rgba(0,0,0,.22);
+      box-shadow:0 10px 18px rgba(91,59,18,.18);
     }
+
     .moneyItem .coinOct:before{
       content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(circle at 28% 25%, rgba(255,255,255,.58), rgba(255,255,255,0) 52%);
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at 28% 25%,rgba(255,255,255,.62),rgba(255,255,255,0) 52%);
       opacity:.95;
       pointer-events:none;
     }
+
     .moneyItem .coinOct small{
-      display:block;font-size:10px;font-weight:1000;letter-spacing:.7px;opacity:.9;margin-top:2px;text-transform:uppercase;
+      display:block;
+      font-size:10px;
+      font-weight:1000;
+      letter-spacing:.7px;
+      opacity:.9;
+      margin-top:2px;
+      text-transform:uppercase;
     }
 
     .moneyItem .noteCard{
-      width:122px; height:64px;
+      width:122px;
+      height:64px;
       border-radius:18px;
-      border:3px solid rgba(255,255,255,.65);
-      box-shadow:0 14px 22px rgba(0,0,0,.22);
-      display:flex;align-items:center;justify-content:center;
+      border:3px solid rgba(255,255,255,.72);
+      box-shadow:0 10px 18px rgba(91,59,18,.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
       font-weight:1000;
       position:relative;
       overflow:hidden;
@@ -439,14 +590,16 @@
       color:#0b1220;
       text-align:center;
     }
+
     .moneyItem .noteCard:before{
       content:"";
       position:absolute;
       inset:0;
-      background: radial-gradient(circle at 28% 25%, rgba(255,255,255,.60), rgba(255,255,255,0) 54%);
+      background:radial-gradient(circle at 28% 25%,rgba(255,255,255,.62),rgba(255,255,255,0) 54%);
       opacity:.95;
       pointer-events:none;
     }
+
     .moneyItem .noteCard:after{
       content:"";
       position:absolute;
@@ -456,87 +609,132 @@
       opacity:.55;
       pointer-events:none;
     }
+
     .moneyItem .noteCard .big{
       font-size:26px;
       letter-spacing:.5px;
       text-shadow:0 2px 0 rgba(255,255,255,.35);
-      position:relative; z-index:2;
-    }
-    .moneyItem .noteCard small{
-      display:block;font-size:10px;opacity:.90;letter-spacing:1px;text-transform:uppercase;margin-top:2px;
-      position:relative; z-index:2;
+      position:relative;
+      z-index:2;
     }
 
-    .moneyItem .note-v2 { background:#ffa64d; }
-    .moneyItem .note-v5 { background:#66f0b2; }
-    .moneyItem .note-v10{ background:#5ad2ff; }
-    .moneyItem .note-v50{ background:#b58cff; }
+    .moneyItem .noteCard small{
+      display:block;
+      font-size:10px;
+      opacity:.90;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      margin-top:2px;
+      position:relative;
+      z-index:2;
+    }
+
+    .moneyItem .note-v2{background:#ffa64d}
+    .moneyItem .note-v5{background:#66f0b2}
+    .moneyItem .note-v10{background:#5ad2ff}
+    .moneyItem .note-v50{background:#b58cff}
 
     .practiceHud{
       margin-top:12px;
       display:grid;
-      grid-template-columns: 1fr 1fr .6fr;
+      grid-template-columns:1fr 1fr .6fr;
       gap:12px;
     }
-    @media (max-width: 720px){
-      .practiceHud{grid-template-columns:1fr}
-    }
+
     .hudBox{
       border-radius:20px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(0,0,0,.28);
-      box-shadow:0 14px 34px rgba(0,0,0,.26);
-      padding:14px 14px;
-      backdrop-filter: blur(10px);
+      border:1px solid rgba(91,59,18,.14);
+      background:rgba(255,255,255,.58);
+      box-shadow:0 8px 18px rgba(91,59,18,.10);
+      padding:14px;
     }
+
     .hudTitle{
       font-size:12px;
-      color:rgba(255,255,255,.78);
+      color:#7b5b15;
       font-weight:1000;
       letter-spacing:.3px;
-      display:flex;align-items:center;gap:8px;
       margin:0 0 8px;
       text-transform:uppercase;
     }
+
     .hudValue{
       font-size:22px;
       font-weight:1000;
+      color:#3c2505;
       letter-spacing:.2px;
       line-height:1.1;
     }
+
     .hudValue.mono{font-family:var(--mono)}
+
     .hudNote{
       margin-top:6px;
       font-size:13px;
-      color:rgba(255,255,255,.72);
-    }
-    .hudBox.now{
-      background:linear-gradient(135deg, rgba(255,79,216,.22), rgba(66,230,255,.18));
-      border-color:rgba(66,230,255,.26);
-    }
-    .hudBox.total{
-      background:linear-gradient(135deg, rgba(104,255,157,.20), rgba(255,210,90,.18));
-      border-color:rgba(104,255,157,.26);
+      color:#6b5a36;
+      font-weight:700;
     }
 
-    .qTop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
-    .meter{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+    .teacherDoneActions{
+      display:none;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
 
-    .answerRow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;}
+    .teacherDoneActions.show{
+      display:grid;
+    }
+
+    .qTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .meter{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .answerRow{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
     .moneyInput{
-      display:flex;gap:10px;align-items:center;
-      padding:12px 14px;border-radius:18px;border:1px solid var(--line);
-      background:rgba(255,255,255,.08);
-      font-weight:1000;color:var(--ink);
-      box-shadow:0 12px 30px rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:12px 14px;
+      border-radius:18px;
+      border:1px solid rgba(91,59,18,.14);
+      background:rgba(255,255,255,.68);
+      font-weight:1000;
+      color:#3c2505;
+      box-shadow:0 8px 18px rgba(91,59,18,.10);
     }
-    .moneyInput span{color:rgba(255,255,255,.92);font-size:16px}
+
+    .moneyInput span{
+      color:#3c2505;
+      font-size:16px;
+    }
+
     .moneyInput input{
       width:160px;
-      padding:10px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.18);
-      background:rgba(0,0,0,.28);
-      color:var(--ink);
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(91,59,18,.18);
+      background:rgba(255,255,255,.92);
+      color:#3c2505;
       font-weight:1000;
       font-family:var(--mono);
       font-size:16px;
@@ -544,59 +742,109 @@
     }
 
     .msg{
-      margin-top:10px;padding:12px 12px;border-radius:18px;border:1px solid var(--line);
-      background:rgba(0,0,0,.26);font-weight:1000;line-height:1.35;
+      margin-top:10px;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid rgba(91,59,18,.12);
+      background:rgba(255,255,255,.58);
+      font-weight:1000;
+      line-height:1.35;
       display:none;
+      color:#3c2505;
     }
-    .msg.good{display:block;border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.12)}
-    .msg.bad{display:block;border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.12)}
-    .msg.info{display:block;border-color:rgba(66,230,255,.35);background:rgba(66,230,255,.12)}
+
+    .msg.good{
+      display:block;
+      border-color:rgba(34,197,94,.35);
+      background:#dcfce7;
+      color:#14532d;
+    }
+
+    .msg.bad{
+      display:block;
+      border-color:rgba(239,68,68,.35);
+      background:#fee2e2;
+      color:#7f1d1d;
+    }
+
+    .msg.info{
+      display:block;
+      border-color:rgba(14,165,233,.28);
+      background:#e0f2fe;
+      color:#075985;
+    }
 
     #confetti{
-      position:fixed; inset:0;
+      position:fixed;
+      inset:0;
       pointer-events:none;
       z-index:9990;
     }
 
     footer{
       margin-top:18px;
-      color:rgba(255,255,255,.62);
+      color:#5b3b12;
       font-size:12px;
       text-align:center;
       padding:16px 0 8px;
+      font-weight:900;
     }
 
-    .fine{color:rgba(255,255,255,.65);font-size:13px;line-height:1.45;margin-top:10px;}
-    label{display:block;font-size:12px;color:rgba(255,255,255,.70);margin:0 0 6px;font-weight:1000;letter-spacing:.2px;}
-    select, input[type="number"]{
+    .fine{
+      color:#6b5a36;
+      font-size:13px;
+      line-height:1.45;
+      margin-top:10px;
+      font-weight:800;
+    }
+
+    label{
+      display:block;
+      font-size:12px;
+      color:#6b5a36;
+      margin:0 0 6px;
+      font-weight:1000;
+      letter-spacing:.2px;
+    }
+
+    select{
       width:100%;
-      padding:12px 12px;border-radius:16px;border:1px solid var(--line);
-      background:rgba(255,255,255,.08);
-      color:var(--ink);
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(91,59,18,.18);
+      background:rgba(255,255,255,.78);
+      color:#3c2505;
       outline:none;
       font-weight:1000;
-      box-shadow:0 12px 30px rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
+      box-shadow:0 8px 18px rgba(91,59,18,.10);
     }
+
     select option{
       color:#111827;
       background:#fff;
     }
+
     .controls{
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns:1fr;
       gap:12px;
       margin-top:10px;
     }
-    .rowBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 
-    /* =========================================================
-       Mobile-Friendly Patch for all phone sizes
-       ========================================================= */
-    @media (max-width: 768px){
-      .wrap{
-        padding:12px 10px 70px;
-      }
+    .rowBtns{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .topActions{justify-content:flex-start}
+    }
+
+    @media (max-width:768px){
+      .wrap{padding:12px 10px 70px}
 
       header{
         flex-direction:column;
@@ -604,13 +852,9 @@
         padding:8px 4px 6px;
       }
 
-      .title{
-        gap:10px;
-      }
+      .title{gap:10px}
 
-      h1{
-        font-size:clamp(20px, 5.4vw, 26px);
-      }
+      h1{font-size:clamp(20px,5.4vw,26px)}
 
       .sub{
         font-size:13px;
@@ -631,9 +875,7 @@
         text-align:center;
       }
 
-      #unlockVoice{
-        grid-column:1 / -1;
-      }
+      #unlockVoice{grid-column:1 / -1}
 
       .grid{
         grid-template-columns:1fr;
@@ -641,9 +883,7 @@
         margin-top:8px;
       }
 
-      .card{
-        border-radius:20px;
-      }
+      .card{border-radius:20px}
 
       .cardHead{
         padding:12px;
@@ -665,7 +905,7 @@
 
       .mainBtns{
         display:grid;
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:1fr;
         gap:8px;
       }
 
@@ -674,9 +914,7 @@
         min-height:44px;
       }
 
-      .cardBody{
-        padding:12px;
-      }
+      .cardBody{padding:12px}
 
       .activityBanner{
         padding:12px;
@@ -684,17 +922,9 @@
         align-items:stretch;
       }
 
-      .activityBanner .big{
-        font-size:18px;
-      }
-
-      .activityBanner .small{
-        font-size:12.5px;
-      }
-
-      .activityBanner .btn{
-        width:100%;
-      }
+      .activityBanner .big{font-size:18px}
+      .activityBanner .small{font-size:12.5px}
+      .activityBanner .btn{width:100%}
 
       .teachingBox{
         font-size:14px;
@@ -717,17 +947,14 @@
         border-radius:16px;
       }
 
-      .hudValue{
-        font-size:20px;
+      .hudValue{font-size:20px}
+      .hudNote{font-size:12px}
+
+      .teacherDoneActions{
+        grid-template-columns:1fr;
       }
 
-      .hudNote{
-        font-size:12px;
-      }
-
-      .qTop{
-        align-items:stretch;
-      }
+      .qTop{align-items:stretch}
 
       .meter{
         display:grid;
@@ -741,9 +968,7 @@
         justify-content:center;
       }
 
-      #btnRestartQuiz{
-        width:100%;
-      }
+      #btnRestartQuiz{width:100%}
 
       .answerRow{
         display:grid;
@@ -774,9 +999,7 @@
         gap:8px;
       }
 
-      .rowBtns .btn{
-        width:100%;
-      }
+      .rowBtns .btn{width:100%}
 
       select{
         min-height:46px;
@@ -795,14 +1018,14 @@
       }
 
       .moneyItem{
-        width:clamp(92px, 28vw, 126px);
-        height:clamp(74px, 22vw, 90px);
+        width:clamp(92px,28vw,126px);
+        height:clamp(74px,22vw,90px);
         border-radius:16px;
       }
 
       .moneyItem.small{
-        width:clamp(76px, 23vw, 100px);
-        height:clamp(70px, 21vw, 84px);
+        width:clamp(76px,23vw,100px);
+        height:clamp(70px,21vw,84px);
       }
 
       .moneyItem .label{
@@ -820,49 +1043,43 @@
       }
 
       .moneyItem .coin{
-        width:clamp(52px, 16vw, 66px);
-        height:clamp(52px, 16vw, 66px);
+        width:clamp(52px,16vw,66px);
+        height:clamp(52px,16vw,66px);
       }
 
       .moneyItem .coin .inner{
-        width:clamp(40px, 13vw, 52px);
-        height:clamp(40px, 13vw, 52px);
+        width:clamp(40px,13vw,52px);
+        height:clamp(40px,13vw,52px);
       }
 
       .moneyItem .coin .inner span{
-        font-size:clamp(14px, 4vw, 18px);
+        font-size:clamp(14px,4vw,18px);
       }
 
-      .moneyItem .coin .inner small{
-        font-size:8px;
-      }
+      .moneyItem .coin .inner small{font-size:8px}
 
       .moneyItem .coinOct{
-        width:clamp(54px, 17vw, 68px);
-        height:clamp(54px, 17vw, 68px);
-        font-size:clamp(14px, 4vw, 18px);
+        width:clamp(54px,17vw,68px);
+        height:clamp(54px,17vw,68px);
+        font-size:clamp(14px,4vw,18px);
       }
 
-      .moneyItem .coinOct small{
-        font-size:8px;
-      }
+      .moneyItem .coinOct small{font-size:8px}
 
       .moneyItem .noteCard{
-        width:clamp(86px, 25vw, 110px);
-        height:clamp(48px, 14vw, 60px);
+        width:clamp(86px,25vw,110px);
+        height:clamp(48px,14vw,60px);
         border-radius:14px;
       }
 
       .moneyItem .noteCard .big{
-        font-size:clamp(18px, 5vw, 24px);
+        font-size:clamp(18px,5vw,24px);
       }
 
-      .moneyItem .noteCard small{
-        font-size:8px;
-      }
+      .moneyItem .noteCard small{font-size:8px}
     }
 
-    @media (max-width: 390px){
+    @media (max-width:390px){
       .wrap{
         padding-left:8px;
         padding-right:8px;
@@ -874,19 +1091,10 @@
         font-size:22px;
       }
 
-      h1{
-        font-size:20px;
-      }
-
-      .sub{
-        font-size:12px;
-      }
+      h1{font-size:20px}
+      .sub{font-size:12px}
 
       .modeTabs{
-        grid-template-columns:1fr;
-      }
-
-      .mainBtns{
         grid-template-columns:1fr;
       }
 
@@ -894,9 +1102,7 @@
         grid-template-columns:1fr;
       }
 
-      .moneyRow{
-        gap:7px;
-      }
+      .moneyRow{gap:7px}
 
       .moneyItem{
         width:88px;
@@ -929,10 +1135,8 @@
       }
     }
 
-    @media (max-width: 330px){
-      .cardBody{
-        padding:9px;
-      }
+    @media (max-width:330px){
+      .cardBody{padding:9px}
 
       .activityBanner,
       .teachingBox,
@@ -957,18 +1161,10 @@
       }
     }
 
-    @media (max-height: 520px) and (orientation: landscape){
-      .wrap{
-        padding-top:8px;
-      }
-
-      header{
-        padding-top:4px;
-      }
-
-      .sub{
-        display:none;
-      }
+    @media (max-height:520px) and (orientation:landscape){
+      .wrap{padding-top:8px}
+      header{padding-top:4px}
+      .sub{display:none}
 
       .badge{
         width:40px;
@@ -976,13 +1172,9 @@
         font-size:22px;
       }
 
-      h1{
-        font-size:20px;
-      }
+      h1{font-size:20px}
 
-      .cardBody{
-        padding:10px;
-      }
+      .cardBody{padding:10px}
 
       .activityBanner{
         margin-bottom:8px;
@@ -994,30 +1186,18 @@
         padding:9px 11px;
       }
 
-      .hint{
-        margin-bottom:8px;
-      }
+      .hint{margin-bottom:8px}
 
       .practiceHud{
         grid-template-columns:1fr 1fr 1fr;
         gap:8px;
       }
 
-      .hudBox{
-        padding:9px;
-      }
+      .hudBox{padding:9px}
+      .hudValue{font-size:18px}
 
-      .hudValue{
-        font-size:18px;
-      }
-
-      .moneyItem{
-        height:72px;
-      }
-
-      .moneyItem.small{
-        height:68px;
-      }
+      .moneyItem{height:72px}
+      .moneyItem.small{height:68px}
     }
   </style>
 
@@ -1029,16 +1209,17 @@
 
   <audio id="sndCorrect" src="correct.mp3" preload="auto"></audio>
   <audio id="sndWrong" src="wrong.mp3" preload="auto"></audio>
+  <audio id="sndTime" src="clock.mp3" preload="auto"></audio>
 
   <div class="wrap">
     <header>
       <div class="title">
         <div class="badge" aria-hidden="true">💰</div>
         <div>
-          <h1>P1 Counting Money (SGD) — Count On</h1>
+          <h1>P1 Counting Money (SGD)</h1>
           <p class="sub">
-            <b>Teacher Practice:</b> Press <b>Next</b> to count the highlighted money. The computer reads the running total aloud.<br/>
-            <b>Pupil Quiz:</b> Pupils count and type a whole-number answer. Coins mode uses <b>cents up to 100¢</b>. Dollars mode uses <b>dollars up to $100</b>.
+            <b>Teacher Practice:</b> Count one item at a time with gentle read-aloud.<br/>
+            <b>Pupil Quiz:</b> Count and type a whole-number answer. Coins use <b>cents up to 100¢</b>. Dollars use <b>dollars up to $100</b>.
           </p>
         </div>
       </div>
@@ -1049,16 +1230,12 @@
           <b id="statusText">Ready</b>
         </div>
 
-        <div class="pill" title="Practice synthetic speech">
+        <div class="pill" title="Teacher Practice read-out">
           <input id="ttsToggle" type="checkbox" checked />
-          <span>Practice Read Out</span>
+          <span>Read Out</span>
         </div>
 
-        <button class="btn ghost" id="unlockVoice">🔓 Unlock voice</button>
-
-        <div class="pill" title="Items arranged from biggest to smallest">
-          <span>Big → Small ✅</span>
-        </div>
+        <button class="btn ghost" id="unlockVoice">🔓 Unlock gentle voice</button>
       </div>
     </header>
 
@@ -1067,11 +1244,11 @@
         <div class="cardHead">
           <div class="modeTabs">
             <div class="tab active" id="tabPractice" role="button" tabindex="0">Teacher Practice</div>
-            <div class="tab" id="tabQuiz" role="button" tabindex="0">Pupil Quiz (10 Q • 30s)</div>
+            <div class="tab" id="tabQuiz" role="button" tabindex="0">Pupil Quiz</div>
           </div>
+
           <div class="mainBtns">
-            <button class="btn ghost" id="btnReset">Reset</button>
-            <button class="btn" id="btnNext">Next</button>
+            <button class="btn" id="btnNext">Count Next</button>
           </div>
         </div>
 
@@ -1090,21 +1267,20 @@
           </div>
 
           <p class="hint">
-            Teacher: press <b>Next</b>. The highlighted item is the one to count now.
-            The computer reads the running total.
+            Press <b>Count Next</b>. The highlighted item is the one being counted now.
           </p>
 
           <div class="moneyRow" id="practiceMoney"></div>
 
           <div class="practiceHud">
-            <div class="hudBox now">
-              <div class="hudTitle">Now counting</div>
-              <div class="hudValue" id="nowCounting">Press Next</div>
-              <div class="hudNote">Value is shown for practice.</div>
+            <div class="hudBox">
+              <div class="hudTitle">Now Counting</div>
+              <div class="hudValue" id="nowCounting">Press Count Next</div>
+              <div class="hudNote">The blue item is counted now.</div>
             </div>
 
-            <div class="hudBox total">
-              <div class="hudTitle">Running total</div>
+            <div class="hudBox">
+              <div class="hudTitle">Running Total</div>
               <div class="hudValue mono" id="runningTotal">0¢</div>
               <div class="hudNote" id="runningNote">Shown in cents.</div>
             </div>
@@ -1112,10 +1288,16 @@
             <div class="hudBox">
               <div class="hudTitle">Step</div>
               <div class="hudValue mono" id="stepBox">0 / 0</div>
+              <div class="hudNote">Count big to small.</div>
             </div>
           </div>
 
           <div class="msg info" id="practiceMsg" style="display:none"></div>
+
+          <div class="teacherDoneActions" id="teacherDoneActions">
+            <button class="btn ghost" id="btnRestartSame" type="button">Restart Same Question</button>
+            <button class="btn warm" id="btnNextQuestion" type="button">Next Question</button>
+          </div>
 
           <div class="fine" id="practiceFine">
             P1 coins mode uses: <b>5¢, 10¢, 20¢, 50¢</b>. Items are arranged <b>biggest → smallest</b>.
@@ -1137,8 +1319,7 @@
           </div>
 
           <p class="hint">
-            Pupils: count the money from <b>big → small</b> and type the final amount within <b>30 seconds</b>.
-            No voice in quiz.
+            Count the money from <b>big → small</b> and type the final amount within <b>30 seconds</b>.
           </p>
 
           <div class="qTop">
@@ -1172,57 +1353,29 @@
       <div class="card">
         <div class="cardHead">
           <h2>Settings</h2>
-          <span class="chipStat"><span class="miniDot"></span>P1 Scope ✅</span>
+          <span class="chipStat"><span class="miniDot"></span>P1 Scope</span>
         </div>
 
         <div class="cardBody">
-          <div id="practiceControls">
-            <p class="hint" style="margin-bottom:8px">
-              <b>Activity:</b> Choose coins or dollars. Teacher Practice reads the running total aloud.
-            </p>
-
-            <div class="controls">
-              <div>
-                <label>Activity Type</label>
-                <select id="activitySelect">
-                  <option value="coins">Coins: cents up to $1</option>
-                  <option value="dollars">Dollars: up to $100</option>
-                </select>
-              </div>
-
-              <div>
-                <label>Practice Set (10 sets)</label>
-                <select id="practiceSelect"></select>
-              </div>
+          <div class="controls">
+            <div>
+              <label>Activity Type</label>
+              <select id="activitySelect">
+                <option value="coins">Coins: cents up to $1</option>
+                <option value="dollars">Dollars: up to $100</option>
+              </select>
             </div>
 
-            <div class="rowBtns">
-              <button class="btn ghost" id="btnLoadPractice" type="button">Load Practice</button>
-              <button class="btn ghost" id="btnNew10Practice" type="button">New 10 Practice Sets</button>
-            </div>
-
-            <div class="fine" style="margin-top:10px">
-              Voice preference: tries <b>Microsoft Mark</b>, then <b>Zira</b>, then <b>David</b> before falling back to any English voice.
-            </div>
-          </div>
-
-          <hr style="border:none;border-top:1px solid rgba(255,255,255,.12);margin:14px 0">
-
-          <div id="quizControls">
-            <p class="hint" style="margin-bottom:8px">
-              <b>Quiz:</b> 10 questions, 30 seconds each, no voice. Correct answer triggers confetti + sound.
-            </p>
-            <div class="rowBtns">
-              <button class="btn ghost" id="btnStartQuiz" type="button">Start / Restart Quiz</button>
-            </div>
+            <button class="btn ghost" id="btnStartQuiz" type="button">Start / Restart Quiz</button>
           </div>
 
           <div class="fine" style="margin-top:14px">
             <b>P1-friendly scope:</b><br>
             • Coins: 5¢, 10¢, 20¢, 50¢, total up to 100¢.<br>
             • Dollars: $1, $2, $5, $10, $50, total up to $100.<br>
-            • Quiz answers are whole cents or whole dollars, not decimal money notation.<br>
-            • Coins mode explicitly teaches: <b>100 cents = 1 dollar</b>.
+            • Quiz answers are whole cents or whole dollars.<br>
+            • Coins mode teaches: <b>100 cents = 1 dollar</b>.<br>
+            • Timer-up sound uses: <b>clock.mp3</b>.
           </div>
         </div>
       </div>
@@ -1245,13 +1398,14 @@
 })();
 
 /* =========================================================
-   Strong anti-stutter TTS system
+   Robust gentle female TTS system
    ========================================================= */
 let UI_LOCKED = false;
 
 function setStatus(isSpeaking){
   const dot = document.getElementById("statusDot");
   const txt = document.getElementById("statusText");
+
   if(isSpeaking){
     dot.classList.remove("ready");
     dot.classList.add("speaking");
@@ -1270,6 +1424,7 @@ function setUILock(on){
   const els = document.querySelectorAll("button, input, select, textarea");
   els.forEach(el=>{
     if(!el.dataset) return;
+
     if(UI_LOCKED){
       if(el.dataset.prevDisabled === undefined){
         el.dataset.prevDisabled = el.disabled ? "1" : "0";
@@ -1283,8 +1438,7 @@ function setUILock(on){
     }
   });
 
-  const tabs = document.querySelectorAll(".tab");
-  tabs.forEach(t=>{
+  document.querySelectorAll(".tab").forEach(t=>{
     if(UI_LOCKED){
       t.classList.add("locked");
       t.setAttribute("aria-disabled","true");
@@ -1303,6 +1457,7 @@ function hardBlock(e){
   e.stopPropagation();
   e.stopImmediatePropagation();
 }
+
 ["click","pointerdown","pointerup","keydown","keyup","input","change","submit","touchend"].forEach(type=>{
   document.addEventListener(type, hardBlock, true);
 });
@@ -1311,8 +1466,8 @@ const TTS = {
   enabled:true,
   busy:false,
   voice:null,
-  rate:0.92,
-  pitch:1,
+  rate:0.84,
+  pitch:1.08,
   volume:1,
 
   primed:false,
@@ -1328,13 +1483,19 @@ const TTS = {
     const byName = (re) => voices.find(v => isEnglish(v) && re.test(v.name || ""));
 
     this.voice =
-      byName(/microsoft.*mark/i) ||
+      byName(/microsoft.*jenny/i) ||
+      byName(/microsoft.*aria/i) ||
       byName(/microsoft.*zira/i) ||
-      byName(/microsoft.*david/i) ||
-      byName(/mark/i) ||
+      byName(/microsoft.*sonia/i) ||
+      byName(/google.*female/i) ||
+      byName(/samantha/i) ||
+      byName(/karen/i) ||
+      byName(/susan/i) ||
       byName(/zira/i) ||
-      byName(/david/i) ||
-      voices.find(v => /en-SG/i.test(v.lang || "")) ||
+      byName(/jenny/i) ||
+      byName(/aria/i) ||
+      byName(/sonia/i) ||
+      voices.find(v => /en-SG/i.test(v.lang || "") && /female|zira|jenny|aria|sonia|samantha|karen/i.test(v.name || "")) ||
       voices.find(isEnglish) ||
       voices[0] ||
       null;
@@ -1352,8 +1513,8 @@ const TTS = {
     let tries = 0;
     const poll = setInterval(()=>{
       tries++;
-      if(this._pickVoice() || tries >= 12) clearInterval(poll);
-    }, 250);
+      if(this._pickVoice() || tries >= 16) clearInterval(poll);
+    },250);
 
     try{ speechSynthesis.onvoiceschanged = pick; }catch(e){}
   },
@@ -1373,10 +1534,9 @@ const TTS = {
       u.rate = 1;
       u.pitch = 1;
       u.lang = (this.voice && this.voice.lang) ? this.voice.lang : "en-SG";
-
       speechSynthesis.speak(u);
 
-      setTimeout(()=>{ try{ speechSynthesis.cancel(); }catch(e){} }, 20);
+      setTimeout(()=>{ try{ speechSynthesis.cancel(); }catch(e){} }, 80);
     }catch(e){}
   },
 
@@ -1388,13 +1548,14 @@ const TTS = {
     setUILock(false);
   },
 
-  _chunkText(text, maxLen=120){
+  _chunkText(text, maxLen=110){
     const t = String(text||"").trim().replace(/\s+/g," ");
     if(!t) return [];
 
     const parts = [];
     let start = 0;
     const isPunct = (ch)=> (ch==="."||ch==="!"||ch==="?"||ch===";"||ch===":");
+
     for(let i=0;i<t.length;i++){
       const ch = t[i];
       if(isPunct(ch)){
@@ -1406,9 +1567,9 @@ const TTS = {
         }
       }
     }
+
     const tail = t.slice(start).trim();
     if(tail) parts.push(tail);
-
     if(!parts.length) parts.push(t);
 
     const chunks = [];
@@ -1454,6 +1615,10 @@ const TTS = {
     return chunks.length ? chunks : [t];
   },
 
+  async _preSpeakDelay(){
+    await new Promise(r=>setTimeout(r, 260));
+  },
+
   speakOnce(text){
     if(!this.enabled) return Promise.resolve(false);
     if(!("speechSynthesis" in window)) return Promise.resolve(false);
@@ -1470,6 +1635,7 @@ const TTS = {
 
     return new Promise((resolve)=>{
       let finished = false;
+
       const done = (ok)=>{
         if(finished) return;
         finished = true;
@@ -1480,6 +1646,7 @@ const TTS = {
 
       const speakChunk = (chunk)=> new Promise((res)=>{
         if(myToken !== this._token) return res(false);
+
         try{
           const u = new SpeechSynthesisUtterance(chunk);
           if(this.voice) u.voice = this.voice;
@@ -1495,7 +1662,7 @@ const TTS = {
             res(ok);
           };
 
-          const safetyMs = Math.max(4500, Math.min(25000, 1200 + chunk.length * 170));
+          const safetyMs = Math.max(5000, Math.min(26000, 1400 + chunk.length * 185));
           const safety = setTimeout(()=>{
             try{ speechSynthesis.cancel(); }catch(e){}
             finish(false);
@@ -1517,14 +1684,24 @@ const TTS = {
           this.busy = true;
           setUILock(true);
 
-          const chunks = this._chunkText(t, 120);
+          await this._preSpeakDelay();
+
+          const chunks = this._chunkText(t,110);
           let allOk = true;
 
           for(const ch of chunks){
-            if(myToken !== this._token){ allOk = false; break; }
+            if(myToken !== this._token){
+              allOk = false;
+              break;
+            }
+
             const ok = await speakChunk(ch);
-            if(!ok){ allOk = false; break; }
-            await new Promise(r=>setTimeout(r, 60));
+            if(!ok){
+              allOk = false;
+              break;
+            }
+
+            await new Promise(r=>setTimeout(r, 110));
           }
 
           done(allOk);
@@ -1535,6 +1712,7 @@ const TTS = {
     });
   }
 };
+
 TTS.init();
 
 document.getElementById("ttsToggle").addEventListener("change", ()=>{
@@ -1547,7 +1725,7 @@ document.getElementById("unlockVoice").addEventListener("click", async ()=>{
   if(TTS.busy) return;
   ensureAudio();
   TTS.prime();
-  await TTS.speakOnce("Voice unlocked.");
+  await TTS.speakOnce("Gentle voice is ready.");
 });
 
 /* =========================================================
@@ -1718,8 +1896,7 @@ function launchConfetti(){
   const W = window.innerWidth, H = window.innerHeight;
   confettiBits = [];
 
-  const n = 190;
-  for(let i=0;i<n;i++){
+  for(let i=0;i<170;i++){
     confettiBits.push({
       x: W*0.50 + (Math.random()*260-130),
       y: H*0.20 + (Math.random()*90-45),
@@ -1783,7 +1960,10 @@ document.addEventListener("pointerdown", ()=>{
   ensureAudio();
   TTS.prime();
 }, {once:true, capture:true});
-document.addEventListener("touchend", ()=>{ TTS.prime(); }, {once:true, capture:true});
+
+document.addEventListener("touchend", ()=>{
+  TTS.prime();
+}, {once:true, capture:true});
 
 function playAudio(el){
   ensureAudio();
@@ -1793,7 +1973,9 @@ function playAudio(el){
     const p = el.play();
     if(p && typeof p.catch === "function") p.catch(()=>{});
     return true;
-  }catch(e){ return false; }
+  }catch(e){
+    return false;
+  }
 }
 
 function beepGood(){
@@ -1802,15 +1984,16 @@ function beepGood(){
   try{
     const o1 = audioCtx.createOscillator();
     const o2 = audioCtx.createOscillator();
-    const g  = audioCtx.createGain();
+    const g = audioCtx.createGain();
 
-    o1.type="sine";     o2.type="triangle";
+    o1.type="sine";
+    o2.type="triangle";
     o1.frequency.value = 880;
     o2.frequency.value = 660;
-
     g.gain.value = 0.0001;
 
-    o1.connect(g); o2.connect(g);
+    o1.connect(g);
+    o2.connect(g);
     g.connect(audioCtx.destination);
 
     const t0 = audioCtx.currentTime;
@@ -1818,8 +2001,10 @@ function beepGood(){
     g.gain.exponentialRampToValueAtTime(0.12, t0+0.02);
     g.gain.exponentialRampToValueAtTime(0.0001, t0+0.18);
 
-    o1.start(t0); o2.start(t0);
-    o1.stop(t0+0.20); o2.stop(t0+0.20);
+    o1.start(t0);
+    o2.start(t0);
+    o1.stop(t0+0.20);
+    o2.stop(t0+0.20);
   }catch(e){}
 }
 
@@ -1829,6 +2014,7 @@ function beepBad(){
   try{
     const o = audioCtx.createOscillator();
     const g = audioCtx.createGain();
+
     o.type="square";
     o.frequency.value = 180;
     g.gain.value = 0.0001;
@@ -1850,8 +2036,14 @@ function sfxCorrect(){
   const ok = playAudio(document.getElementById("sndCorrect"));
   if(!ok) beepGood();
 }
+
 function sfxWrong(){
   const ok = playAudio(document.getElementById("sndWrong"));
+  if(!ok) beepBad();
+}
+
+function sfxTime(){
+  const ok = playAudio(document.getElementById("sndTime"));
   if(!ok) beepBad();
 }
 
@@ -1928,27 +2120,8 @@ function randomQuizQuestion(){
   return {items, answer};
 }
 
-function summarizeSet(items){
-  return items.map(it=>it.display).join("+");
-}
-
-function generatePracticeSets(n=10){
-  const sets = [];
-  const seen = new Set();
-  let guard = 0;
-  while(sets.length < n && guard < 2000){
-    guard++;
-    const items = randomPracticeSet();
-    const sig = items.map(x=>`${x.kind}:${x.value}`).join("|");
-    if(seen.has(sig)) continue;
-    seen.add(sig);
-    sets.push(items);
-  }
-  return sets;
-}
-
 /* =========================================================
-   UI update for activity
+   Activity labels
    ========================================================= */
 function updateActivityLabels(){
   const isCoins = activity === "coins";
@@ -2002,21 +2175,15 @@ function switchActivity(){
   activity = activity === "coins" ? "dollars" : "coins";
   stopTimer();
   updateActivityLabels();
-  PRACTICE_SETS = generatePracticeSets(10);
-  practiceIndex = 0;
-  rebuildPracticeDropdown();
-  loadPractice(0);
+  newTeacherQuestion();
   if(mode === "quiz") startQuiz();
 }
 
 /* =========================================================
-   Practice logic
+   Teacher Practice
    ========================================================= */
-let PRACTICE_SETS = [];
-let practiceIndex = 0;
-let practiceStep = 0;
 let practiceItems = [];
-
+let practiceStep = 0;
 let practiceHighlightOverride = null;
 
 const practiceMoney = document.getElementById("practiceMoney");
@@ -2024,8 +2191,11 @@ const nowCountingEl = document.getElementById("nowCounting");
 const runningTotalEl = document.getElementById("runningTotal");
 const stepBoxEl = document.getElementById("stepBox");
 const practiceMsg = document.getElementById("practiceMsg");
+const teacherDoneActions = document.getElementById("teacherDoneActions");
 
-function practiceOrder(items){ return items.map(x=>x.id); }
+function practiceOrder(items){
+  return items.map(x=>x.id);
+}
 
 function practiceTotals(items, doneCount){
   const order = practiceOrder(items);
@@ -2034,13 +2204,13 @@ function practiceTotals(items, doneCount){
     const it = items.find(x=>x.id===order[i]);
     if(it) total += it.value;
   }
-  return { total, order };
+  return {total, order};
 }
 
 function renderPractice(){
   practiceMoney.innerHTML = "";
 
-  const { order } = practiceTotals(practiceItems, 0);
+  const {order} = practiceTotals(practiceItems, 0);
   const totalSteps = order.length;
 
   let highlightId = null;
@@ -2066,39 +2236,36 @@ function renderPractice(){
 
   if(highlightId){
     const it = practiceItems.find(x=>x.id===highlightId);
-    nowCountingEl.textContent = it ? it.display : "Press Next";
+    nowCountingEl.textContent = it ? it.display : "Press Count Next";
   }else{
-    nowCountingEl.textContent = (practiceStep >= totalSteps) ? "Done!" : "Press Next";
+    nowCountingEl.textContent = practiceStep >= totalSteps ? "Done!" : "Press Count Next";
   }
+
+  const isDone = practiceStep >= totalSteps && totalSteps > 0;
+  teacherDoneActions.classList.toggle("show", isDone);
+  document.getElementById("btnNext").style.display = isDone ? "none" : "";
 }
 
 async function practiceNext(){
-  if(UI_LOCKED || (TTS.enabled && TTS.busy)) return;
+  if(UI_LOCKED || TTS.busy) return;
 
-  const { order } = practiceTotals(practiceItems, 0);
+  const {order} = practiceTotals(practiceItems, 0);
   const totalSteps = order.length;
 
-  if(practiceStep >= totalSteps){
-    practiceStep = 0;
-    practiceHighlightOverride = null;
-    practiceMsg.style.display = "none";
-    renderPractice();
-    document.getElementById("btnNext").textContent = "Next";
-    return;
-  }
+  if(practiceStep >= totalSteps) return;
 
   const idxToCount = practiceStep;
   const currentItem = practiceItems.find(x=>x.id===order[idxToCount]);
   const doneCount = practiceStep + 1;
-  const { total } = practiceTotals(practiceItems, doneCount);
+  const {total} = practiceTotals(practiceItems, doneCount);
 
   practiceHighlightOverride = idxToCount;
   practiceStep = doneCount;
   renderPractice();
 
   if(TTS.enabled){
-    const isFinal = (doneCount >= totalSteps);
-    const phrase = (doneCount === 1 && currentItem)
+    const isFinal = doneCount >= totalSteps;
+    const phrase = doneCount === 1 && currentItem
       ? sayItemValue(currentItem)
       : sayRunningTotal(total, isFinal);
 
@@ -2112,45 +2279,29 @@ async function practiceNext(){
     const finalTotal = practiceTotals(practiceItems, practiceStep).total;
     practiceMsg.className = "msg info";
     practiceMsg.style.display = "block";
-    practiceMsg.innerHTML = `Finished counting. Total amount: <b>${fmtTotal(finalTotal)}</b>.`;
+    practiceMsg.innerHTML = `Finished counting. Total amount: <b>${fmtTotal(finalTotal)}</b>.<br>Choose <b>Restart Same Question</b> or <b>Next Question</b>.`;
   }
-
-  document.getElementById("btnNext").textContent = (practiceStep >= totalSteps) ? "Restart" : "Next";
 }
 
-function practiceReset(){
-  if(UI_LOCKED || (TTS.enabled && TTS.busy)) return;
+function restartSameQuestion(){
+  if(UI_LOCKED || TTS.busy) return;
   practiceStep = 0;
   practiceHighlightOverride = null;
   practiceMsg.style.display = "none";
   renderPractice();
-  document.getElementById("btnNext").textContent = "Next";
 }
 
-function loadPractice(idx){
-  practiceIndex = idx;
-  practiceItems = PRACTICE_SETS[idx] || PRACTICE_SETS[0] || [];
+function newTeacherQuestion(){
+  if(UI_LOCKED || TTS.busy) return;
+  practiceItems = randomPracticeSet();
   practiceStep = 0;
   practiceHighlightOverride = null;
   practiceMsg.style.display = "none";
   renderPractice();
-  document.getElementById("btnNext").textContent = "Next";
-}
-
-function rebuildPracticeDropdown(){
-  const sel = document.getElementById("practiceSelect");
-  sel.innerHTML = "";
-  PRACTICE_SETS.forEach((items,i)=>{
-    const opt = document.createElement("option");
-    opt.value = String(i);
-    opt.textContent = `Practice ${i+1} — ${summarizeSet(items)}`;
-    sel.appendChild(opt);
-  });
-  sel.value = String(practiceIndex);
 }
 
 /* =========================================================
-   Quiz logic
+   Quiz
    ========================================================= */
 const quizMoney = document.getElementById("quizMoney");
 const qProgressChip = document.getElementById("qProgressChip");
@@ -2160,14 +2311,14 @@ const quizMsg = document.getElementById("quizMsg");
 const ansEl = document.getElementById("ans");
 
 let quiz = {
-  total: 10,
-  idx: 0,
-  score: 0,
-  questions: [],
-  firstWrong: new Set(),
-  secondsLeft: 30,
-  timer: null,
-  doneThisQ: false
+  total:10,
+  idx:0,
+  score:0,
+  questions:[],
+  firstWrong:new Set(),
+  secondsLeft:30,
+  timer:null,
+  doneThisQ:false
 };
 
 function renderQuiz(){
@@ -2190,9 +2341,6 @@ function renderQuiz(){
   ansEl.value = "";
   ansEl.focus();
   quiz.doneThisQ = false;
-
-  document.getElementById("btnNext").disabled = true;
-  document.getElementById("btnNext").textContent = "Next";
 }
 
 function stopTimer(){
@@ -2212,6 +2360,7 @@ function startTimer(){
       stopTimer();
       return;
     }
+
     if(quiz.doneThisQ) return;
 
     quiz.secondsLeft--;
@@ -2220,7 +2369,7 @@ function startTimer(){
     if(quiz.secondsLeft <= 0){
       timeUp();
     }
-  }, 1000);
+  },1000);
 }
 
 function timeUp(){
@@ -2234,11 +2383,13 @@ function timeUp(){
   quizMsg.style.display = "block";
   quizMsg.innerHTML = `Time’s up ⏰ Answer is <b>${fmtTotal(q.answer)}</b>.`;
 
-  setTimeout(()=>{ if(mode==="quiz") nextQuestion(); }, 1600);
+  sfxTime();
+
+  setTimeout(()=>{ if(mode==="quiz") nextQuestion(); },1800);
 }
 
 function checkAnswer(){
-  if(mode!=="quiz") return;
+  if(mode !== "quiz") return;
   if(quiz.doneThisQ) return;
 
   const q = quiz.questions[quiz.idx];
@@ -2271,7 +2422,7 @@ function checkAnswer(){
     launchConfetti();
     sfxCorrect();
 
-    setTimeout(()=>{ if(mode==="quiz") nextQuestion(); }, 1300);
+    setTimeout(()=>{ if(mode==="quiz") nextQuestion(); },1300);
     return;
   }
 
@@ -2283,7 +2434,7 @@ function checkAnswer(){
 }
 
 function nextQuestion(){
-  if(mode!=="quiz") return;
+  if(mode !== "quiz") return;
 
   if(quiz.idx < quiz.total - 1){
     quiz.idx++;
@@ -2298,13 +2449,13 @@ function nextQuestion(){
   quizMoney.innerHTML = "";
   quizMsg.className = "msg good";
   quizMsg.style.display = "block";
-  quizMsg.innerHTML = `Quiz complete 🎉<br/>Final score: <b>${quiz.score} / ${quiz.total}</b>`;
-  document.getElementById("btnNext").disabled = true;
+  quizMsg.innerHTML = `Quiz complete 🎉<br>Final score: <b>${quiz.score} / ${quiz.total}</b>`;
   launchConfetti();
 }
 
 function startQuiz(){
   stopTimer();
+
   quiz.total = 10;
   quiz.idx = 0;
   quiz.score = 0;
@@ -2314,6 +2465,7 @@ function startQuiz(){
 
   const seen = new Set();
   let guard = 0;
+
   while(quiz.questions.length < quiz.total && guard < 2500){
     guard++;
     const q = randomQuizQuestion();
@@ -2338,22 +2490,20 @@ const practicePane = document.getElementById("practicePane");
 const quizPane = document.getElementById("quizPane");
 
 function setMode(m){
-  if(UI_LOCKED || (TTS.enabled && TTS.busy)) return;
+  if(UI_LOCKED || TTS.busy) return;
 
   mode = m;
 
   tabPractice.classList.toggle("active", m==="practice");
   tabQuiz.classList.toggle("active", m==="quiz");
 
-  practicePane.style.display = (m==="practice") ? "" : "none";
-  quizPane.style.display = (m==="quiz") ? "" : "none";
+  practicePane.style.display = m==="practice" ? "" : "none";
+  quizPane.style.display = m==="quiz" ? "" : "none";
 
-  document.getElementById("btnNext").disabled = false;
-  document.getElementById("btnNext").textContent = "Next";
-
-  if(m==="practice"){
+  if(m === "practice"){
     stopTimer();
-    practiceReset();
+    document.getElementById("btnNext").style.display = "";
+    restartSameQuestion();
   }else{
     TTS.stop();
     startQuiz();
@@ -2364,58 +2514,29 @@ tabPractice.addEventListener("click", ()=>setMode("practice"));
 tabQuiz.addEventListener("click", ()=>setMode("quiz"));
 
 document.getElementById("btnNext").addEventListener("click", async ()=>{
-  if(mode==="practice"){
-    await practiceNext();
-    return;
-  }
-  if(!quiz.doneThisQ) return;
-  nextQuestion();
+  if(mode === "practice") await practiceNext();
 });
 
-document.getElementById("btnReset").addEventListener("click", ()=>{
-  if(mode==="practice") practiceReset();
-  else startQuiz();
-});
+document.getElementById("btnRestartSame").addEventListener("click", restartSameQuestion);
+document.getElementById("btnNextQuestion").addEventListener("click", newTeacherQuestion);
 
 document.getElementById("btnCheck").addEventListener("click", checkAnswer);
-ansEl.addEventListener("keydown", (e)=>{ if(e.key==="Enter") checkAnswer(); });
+ansEl.addEventListener("keydown", (e)=>{ if(e.key === "Enter") checkAnswer(); });
 
 document.getElementById("btnRestartQuiz").addEventListener("click", ()=>{
-  if(mode==="quiz") startQuiz();
+  if(mode === "quiz") startQuiz();
 });
+
 document.getElementById("btnStartQuiz").addEventListener("click", ()=>{
   setMode("quiz");
 });
 
-document.getElementById("btnLoadPractice").addEventListener("click", ()=>{
-  if(UI_LOCKED || (TTS.enabled && TTS.busy)) return;
-  const idx = parseInt(document.getElementById("practiceSelect").value||"0",10);
-  loadPractice(idx);
-});
-
-document.getElementById("btnNew10Practice").addEventListener("click", ()=>{
-  if(UI_LOCKED || (TTS.enabled && TTS.busy)) return;
-  PRACTICE_SETS = generatePracticeSets(10);
-  practiceIndex = 0;
-  rebuildPracticeDropdown();
-  loadPractice(0);
-});
-
-document.getElementById("practiceSelect").addEventListener("change", ()=>{
-  if(UI_LOCKED || (TTS.enabled && TTS.busy)) return;
-  const idx = parseInt(document.getElementById("practiceSelect").value||"0",10);
-  loadPractice(idx);
-});
-
 document.getElementById("activitySelect").addEventListener("change", ()=>{
-  if(UI_LOCKED || (TTS.enabled && TTS.busy)) return;
+  if(UI_LOCKED || TTS.busy) return;
   activity = document.getElementById("activitySelect").value;
   stopTimer();
   updateActivityLabels();
-  PRACTICE_SETS = generatePracticeSets(10);
-  practiceIndex = 0;
-  rebuildPracticeDropdown();
-  loadPractice(0);
+  newTeacherQuestion();
   if(mode === "quiz") startQuiz();
 });
 
@@ -2427,9 +2548,9 @@ document.getElementById("btnSwitchActivityQuiz").addEventListener("click", switc
    ========================================================= */
 (function init(){
   updateActivityLabels();
-  PRACTICE_SETS = generatePracticeSets(10);
-  rebuildPracticeDropdown();
-  loadPractice(0);
+  practiceItems = randomPracticeSet();
+  practiceStep = 0;
+  practiceHighlightOverride = null;
   setMode("practice");
   renderPractice();
 })();
