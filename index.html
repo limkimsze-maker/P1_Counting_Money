@@ -644,6 +644,11 @@
       font-weight:700;
     }
 
+    .stepButton{
+      width:100%;
+      margin-bottom:10px;
+    }
+
     .teacherDoneActions{
       display:none;
       grid-template-columns:1fr;
@@ -873,14 +878,7 @@
       }
 
       .mainBtns{
-        display:grid;
-        grid-template-columns:1fr;
-        gap:8px;
-      }
-
-      .mainBtns .btn{
-        width:100%;
-        min-height:44px;
+        display:none;
       }
 
       .cardBody{padding:12px}
@@ -1197,9 +1195,7 @@
             <div class="tab" id="tabQuiz" role="button" tabindex="0">Pupil Quiz</div>
           </div>
 
-          <div class="mainBtns">
-            <button class="btn" id="btnNext">Count Next</button>
-          </div>
+          <div class="mainBtns" style="display:none"></div>
         </div>
 
         <div class="cardBody" id="practicePane">
@@ -1236,6 +1232,7 @@
             </div>
 
             <div class="hudBox">
+              <button class="btn stepButton" id="btnNext">Count Next</button>
               <div class="hudTitle">Step</div>
               <div class="hudValue mono" id="stepBox">0 / 0</div>
               <div class="hudNote">Count big to small.</div>
@@ -1325,7 +1322,7 @@
             • Quiz answers are whole cents or whole dollars.<br>
             • Coins mode teaches: <b>100 cents = 1 dollar</b>.<br>
             • Timer-up sound uses: <b>clock.mp3</b>.<br>
-            • The top button changes from <b>Count Next</b> to <b>Next Question</b> in the same position.
+            • <b>Count Next / Next Question</b> is placed above the Step number.
           </div>
         </div>
       </div>
@@ -1711,7 +1708,7 @@ document.getElementById("unlockVoice").addEventListener("click", async ()=>{
   if(TTS.busy) return;
   ensureAudio();
   TTS.prime();
-  await TTS.speakOnce("Ready. Gentle voice is ready.");
+  await TTS.speakOnce("Gentle voice is ready.");
 });
 
 /* =========================================================
@@ -1749,27 +1746,27 @@ function fmtTotal(v){
 
 function sayItemValue(item){
   if(activity === "coins"){
-    if(item.value === 100) return "Ready. Now count 100 cents. That is 1 dollar.";
-    return `Ready. Now count ${item.value} cents.`;
+    if(item.value === 100) return "Now count 100 cents. That is 1 dollar.";
+    return `Now count ${item.value} cents.`;
   }
-  return `Ready. Now count ${item.value} dollars.`;
+  return `Now count ${item.value} dollars.`;
 }
 
 function sayRunningTotal(total, isFinal){
   if(activity === "coins"){
     if(total === 100){
       return isFinal
-        ? "Ready. Now we have 100 cents. That is 1 dollar. Total amount is 1 dollar."
-        : "Ready. Now we have 100 cents. That is 1 dollar.";
+        ? "Now we have 100 cents. That is 1 dollar. Total amount is 1 dollar."
+        : "Now we have 100 cents. That is 1 dollar.";
     }
     return isFinal
-      ? `Ready. Now we have ${total} cents. Total amount is ${total} cents.`
-      : `Ready. Now we have ${total} cents.`;
+      ? `Now we have ${total} cents. Total amount is ${total} cents.`
+      : `Now we have ${total} cents.`;
   }
 
   return isFinal
-    ? `Ready. Now we have ${total} dollars. Total amount is ${total} dollars.`
-    : `Ready. Now we have ${total} dollars.`;
+    ? `Now we have ${total} dollars. Total amount is ${total} dollars.`
+    : `Now we have ${total} dollars.`;
 }
 
 function parseWholeNumber(str){
@@ -2230,10 +2227,9 @@ function renderPractice(){
   const isDone = practiceStep >= totalSteps && totalSteps > 0;
   teacherDoneActions.classList.toggle("show", isDone);
 
-  const topBtn = document.getElementById("btnNext");
-  topBtn.style.display = "";
-  topBtn.textContent = isDone ? "Next Question" : "Count Next";
-  topBtn.classList.toggle("warm", isDone);
+  const stepBtn = document.getElementById("btnNext");
+  stepBtn.textContent = isDone ? "Next Question" : "Count Next";
+  stepBtn.classList.toggle("warm", isDone);
 }
 
 async function practiceNext(){
