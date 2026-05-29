@@ -646,7 +646,7 @@
 
     .teacherDoneActions{
       display:none;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:1fr;
       gap:10px;
       margin-top:12px;
     }
@@ -1246,7 +1246,6 @@
 
           <div class="teacherDoneActions" id="teacherDoneActions">
             <button class="btn ghost" id="btnRestartSame" type="button">Restart Same Question</button>
-            <button class="btn warm" id="btnNextQuestion" type="button">Next Question</button>
           </div>
 
           <div class="fine" id="practiceFine">
@@ -1326,7 +1325,7 @@
             • Quiz answers are whole cents or whole dollars.<br>
             • Coins mode teaches: <b>100 cents = 1 dollar</b>.<br>
             • Timer-up sound uses: <b>clock.mp3</b>.<br>
-            • Stronger TTS warm-up added to prevent first-word cut-off.
+            • The top button changes from <b>Count Next</b> to <b>Next Question</b> in the same position.
           </div>
         </div>
       </div>
@@ -1568,23 +1567,12 @@ const TTS = {
   },
 
   async _preSpeakDelay(){
-    /* Stronger delay for phones that clip the first word */
     await new Promise(r=>setTimeout(r, 950));
   },
 
   async _warmSpeechEngine(){
     if(!("speechSynthesis" in window)) return;
 
-    /* 
-      Stronger fix:
-      1. Wake speech with a quiet word.
-      2. Cancel it.
-      3. Pause.
-      4. Wake once more.
-      5. Cancel again.
-      6. Pause longer before real speech.
-      This prevents the important number from being clipped.
-    */
     try{
       try{ speechSynthesis.cancel(); }catch(e){}
 
@@ -1759,12 +1747,6 @@ function fmtTotal(v){
   return `$${v}`;
 }
 
-/* 
-  Stronger practical fix:
-  The first word may still be clipped on some phones.
-  So the phrase begins with "Ready. Now count..."
-  If "Ready" is clipped, pupils still hear the important number clearly.
-*/
 function sayItemValue(item){
   if(activity === "coins"){
     if(item.value === 100) return "Ready. Now count 100 cents. That is 1 dollar.";
@@ -2247,7 +2229,11 @@ function renderPractice(){
 
   const isDone = practiceStep >= totalSteps && totalSteps > 0;
   teacherDoneActions.classList.toggle("show", isDone);
-  document.getElementById("btnNext").style.display = isDone ? "none" : "";
+
+  const topBtn = document.getElementById("btnNext");
+  topBtn.style.display = "";
+  topBtn.textContent = isDone ? "Next Question" : "Count Next";
+  topBtn.classList.toggle("warm", isDone);
 }
 
 async function practiceNext(){
@@ -2283,7 +2269,7 @@ async function practiceNext(){
     const finalTotal = practiceTotals(practiceItems, practiceStep).total;
     practiceMsg.className = "msg info";
     practiceMsg.style.display = "block";
-    practiceMsg.innerHTML = `Finished counting. Total amount: <b>${fmtTotal(finalTotal)}</b>.<br>Choose <b>Restart Same Question</b> or <b>Next Question</b>.`;
+    practiceMsg.innerHTML = `Finished counting. Total amount: <b>${fmtTotal(finalTotal)}</b>.<br>You may press <b>Next Question</b> or <b>Restart Same Question</b>.`;
   }
 }
 
@@ -2506,7 +2492,6 @@ function setMode(m){
 
   if(m === "practice"){
     stopTimer();
-    document.getElementById("btnNext").style.display = "";
     restartSameQuestion();
   }else{
     TTS.stop();
@@ -2518,11 +2503,19 @@ tabPractice.addEventListener("click", ()=>setMode("practice"));
 tabQuiz.addEventListener("click", ()=>setMode("quiz"));
 
 document.getElementById("btnNext").addEventListener("click", async ()=>{
-  if(mode === "practice") await practiceNext();
+  if(mode !== "practice") return;
+
+  const totalSteps = practiceItems.length;
+  const isDone = practiceStep >= totalSteps && totalSteps > 0;
+
+  if(isDone){
+    newTeacherQuestion();
+  }else{
+    await practiceNext();
+  }
 });
 
 document.getElementById("btnRestartSame").addEventListener("click", restartSameQuestion);
-document.getElementById("btnNextQuestion").addEventListener("click", newTeacherQuestion);
 
 document.getElementById("btnCheck").addEventListener("click", checkAnswer);
 ansEl.addEventListener("keydown", (e)=>{ if(e.key === "Enter") checkAnswer(); });
