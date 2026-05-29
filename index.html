@@ -421,7 +421,6 @@
       border-radius:20px;
     }
 
-    /* ✅ Removed extra value/kind badges on notes and coins */
     .moneyItem .label,
     .moneyItem .kind{
       display:none !important;
@@ -1326,7 +1325,8 @@
             • Dollars: $1, $2, $5, $10, $50, total up to $100.<br>
             • Quiz answers are whole cents or whole dollars.<br>
             • Coins mode teaches: <b>100 cents = 1 dollar</b>.<br>
-            • Timer-up sound uses: <b>clock.mp3</b>.
+            • Timer-up sound uses: <b>clock.mp3</b>.<br>
+            • Stronger TTS warm-up added to prevent first-word cut-off.
           </div>
         </div>
       </div>
@@ -1349,7 +1349,7 @@
 })();
 
 /* =========================================================
-   Robust gentle female TTS system
+   Robust gentle female TTS system — stronger anti cut-off
    ========================================================= */
 let UI_LOCKED = false;
 
@@ -1417,7 +1417,7 @@ const TTS = {
   enabled:true,
   busy:false,
   voice:null,
-  rate:0.84,
+  rate:0.82,
   pitch:1.08,
   volume:1,
 
@@ -1480,14 +1480,15 @@ const TTS = {
       this._pickVoice();
       try{ speechSynthesis.cancel(); }catch(e){}
 
-      const u = new SpeechSynthesisUtterance(" ");
-      u.volume = 0;
+      const u = new SpeechSynthesisUtterance("ready");
+      u.volume = 0.01;
       u.rate = 1;
       u.pitch = 1;
       u.lang = (this.voice && this.voice.lang) ? this.voice.lang : "en-SG";
+      if(this.voice) u.voice = this.voice;
       speechSynthesis.speak(u);
 
-      setTimeout(()=>{ try{ speechSynthesis.cancel(); }catch(e){} }, 80);
+      setTimeout(()=>{ try{ speechSynthesis.cancel(); }catch(e){} }, 180);
     }catch(e){}
   },
 
@@ -1567,7 +1568,52 @@ const TTS = {
   },
 
   async _preSpeakDelay(){
-    await new Promise(r=>setTimeout(r, 260));
+    /* Stronger delay for phones that clip the first word */
+    await new Promise(r=>setTimeout(r, 950));
+  },
+
+  async _warmSpeechEngine(){
+    if(!("speechSynthesis" in window)) return;
+
+    /* 
+      Stronger fix:
+      1. Wake speech with a quiet word.
+      2. Cancel it.
+      3. Pause.
+      4. Wake once more.
+      5. Cancel again.
+      6. Pause longer before real speech.
+      This prevents the important number from being clipped.
+    */
+    try{
+      try{ speechSynthesis.cancel(); }catch(e){}
+
+      const warm1 = new SpeechSynthesisUtterance("ready");
+      warm1.volume = 0.01;
+      warm1.rate = 1;
+      warm1.pitch = 1;
+      warm1.lang = (this.voice && this.voice.lang) ? this.voice.lang : "en-SG";
+      if(this.voice) warm1.voice = this.voice;
+      speechSynthesis.speak(warm1);
+
+      await new Promise(r=>setTimeout(r, 420));
+      try{ speechSynthesis.cancel(); }catch(e){}
+
+      await new Promise(r=>setTimeout(r, 220));
+
+      const warm2 = new SpeechSynthesisUtterance("now");
+      warm2.volume = 0.01;
+      warm2.rate = 1;
+      warm2.pitch = 1;
+      warm2.lang = (this.voice && this.voice.lang) ? this.voice.lang : "en-SG";
+      if(this.voice) warm2.voice = this.voice;
+      speechSynthesis.speak(warm2);
+
+      await new Promise(r=>setTimeout(r, 420));
+      try{ speechSynthesis.cancel(); }catch(e){}
+
+      await new Promise(r=>setTimeout(r, 280));
+    }catch(e){}
   },
 
   speakOnce(text){
@@ -1613,7 +1659,7 @@ const TTS = {
             res(ok);
           };
 
-          const safetyMs = Math.max(5000, Math.min(26000, 1400 + chunk.length * 185));
+          const safetyMs = Math.max(5500, Math.min(28000, 1600 + chunk.length * 200));
           const safety = setTimeout(()=>{
             try{ speechSynthesis.cancel(); }catch(e){}
             finish(false);
@@ -1635,6 +1681,7 @@ const TTS = {
           this.busy = true;
           setUILock(true);
 
+          await this._warmSpeechEngine();
           await this._preSpeakDelay();
 
           const chunks = this._chunkText(t,110);
@@ -1652,7 +1699,7 @@ const TTS = {
               break;
             }
 
-            await new Promise(r=>setTimeout(r, 110));
+            await new Promise(r=>setTimeout(r, 140));
           }
 
           done(allOk);
@@ -1676,7 +1723,7 @@ document.getElementById("unlockVoice").addEventListener("click", async ()=>{
   if(TTS.busy) return;
   ensureAudio();
   TTS.prime();
-  await TTS.speakOnce("Gentle voice is ready.");
+  await TTS.speakOnce("Ready. Gentle voice is ready.");
 });
 
 /* =========================================================
@@ -1712,29 +1759,35 @@ function fmtTotal(v){
   return `$${v}`;
 }
 
+/* 
+  Stronger practical fix:
+  The first word may still be clipped on some phones.
+  So the phrase begins with "Ready. Now count..."
+  If "Ready" is clipped, pupils still hear the important number clearly.
+*/
 function sayItemValue(item){
   if(activity === "coins"){
-    if(item.value === 100) return "100 cents. That is 1 dollar.";
-    return `${item.value} cents.`;
+    if(item.value === 100) return "Ready. Now count 100 cents. That is 1 dollar.";
+    return `Ready. Now count ${item.value} cents.`;
   }
-  return `${item.value} dollars.`;
+  return `Ready. Now count ${item.value} dollars.`;
 }
 
 function sayRunningTotal(total, isFinal){
   if(activity === "coins"){
     if(total === 100){
       return isFinal
-        ? "Now we have 100 cents. That is 1 dollar. Total amount is 1 dollar."
-        : "Now we have 100 cents. That is 1 dollar.";
+        ? "Ready. Now we have 100 cents. That is 1 dollar. Total amount is 1 dollar."
+        : "Ready. Now we have 100 cents. That is 1 dollar.";
     }
     return isFinal
-      ? `Now we have ${total} cents. Total amount is ${total} cents.`
-      : `Now we have ${total} cents.`;
+      ? `Ready. Now we have ${total} cents. Total amount is ${total} cents.`
+      : `Ready. Now we have ${total} cents.`;
   }
 
   return isFinal
-    ? `Now we have ${total} dollars. Total amount is ${total} dollars.`
-    : `Now we have ${total} dollars.`;
+    ? `Ready. Now we have ${total} dollars. Total amount is ${total} dollars.`
+    : `Ready. Now we have ${total} dollars.`;
 }
 
 function parseWholeNumber(str){
